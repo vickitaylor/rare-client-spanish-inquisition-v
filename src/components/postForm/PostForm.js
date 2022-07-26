@@ -19,7 +19,7 @@ export const PostForm = ({ token }) => {
     })
 
 
-
+    // Get category data upon loading page
     useEffect(
         () => {
             getAllCategories().then(setCategories)
@@ -27,12 +27,14 @@ export const PostForm = ({ token }) => {
         []
     )
 
+    // This function gets called whenever a field is updated. Updates "post" state variable to reflect current form entry.
     const handleControlledInputChange = (event) => {
         const newPost = {...post}
         newPost[event.target.name] = event.target.value
         setPost(newPost)
     }
 
+    // This function is activated once form is submitted. Adds current date to post, makes POST call to add post to db, navigates back to homepage. 
     const constructNewPost = () => {
         const copyPost = { ...post }
         copyPost.publication_date = Date(Date.now()).toLocaleString('en-us').split('GMT')[0]
@@ -46,6 +48,9 @@ export const PostForm = ({ token }) => {
             <h2 className="panel-heading">Create Entry</h2>
             <div className="panel-block">
                 <form style={{ width: "100%" }}>
+
+                    {/* Post title input jsx */}
+
                     <div className="field">
                         <label htmlFor="title" className="label">Title: </label>
                         <div className="control">
@@ -57,6 +62,9 @@ export const PostForm = ({ token }) => {
                             />
                         </div>
                     </div>
+
+                    {/* Post text input jsx */}
+
                     <div className="field">
                         <label htmlFor="content" className="label">Content: </label>
                         <div className="content">
@@ -68,6 +76,9 @@ export const PostForm = ({ token }) => {
                             ></textarea>
                         </div>
                     </div>
+
+                    {/* image url input jsx */}
+
                     <div className="field">
                         <label htmlFor="image_url" className="label">Image Url: </label>
                         <div className="control">
@@ -79,6 +90,8 @@ export const PostForm = ({ token }) => {
                             />
                         </div>
                     </div>
+
+                    {/* Category Dropdown jsx */}
 
                     <div className="field">
                         <label htmlFor="category_id" className="label">Category:</label>
@@ -98,6 +111,8 @@ export const PostForm = ({ token }) => {
                             </div>
                         </div>
                     </div>
+
+                    {/* Submit button jsx */}
 
                     <div className="field">
                         <div className="control">
