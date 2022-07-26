@@ -1,20 +1,31 @@
 import { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 import { addPost } from "../../managers/PostManager"
+import { getAllCategories } from "../../managers/CategoryManager"
 
 
 export const PostForm = ({ token }) => {
     const navigate = useNavigate()
 
+    const [categories, setCategories] = useState([])
     const [post, setPost] = useState({
         user_id: token,
-        category_id: 1,
+        category_id: "",
         title: "",
         publication_date: "",
         image_url: "",
         content: "",
         approved: 1
     })
+
+
+
+    useEffect(
+        () => {
+            getAllCategories().then(setCategories)
+        },
+        []
+    )
 
     const handleControlledInputChange = (event) => {
         const newPost = {...post}
@@ -69,29 +80,24 @@ export const PostForm = ({ token }) => {
                         </div>
                     </div>
 
-                    {/* <div className="field">
-                        <label htmlFor="tagId" className="label">Tags</label>
+                    <div className="field">
+                        <label htmlFor="category_id" className="label">Category:</label>
                         <div className="control">
-                            <div className="checkboxes">
-                                {
-                                    tags.map(tag => (
-                                        <div>
-                                            <p>{tag.name}</p>
-                                            <input
-                                                type="checkbox"
-                                                id="topping"
-                                                name="topping"
-                                                value={tag.id}
-                                                onChange={() => handleTagBoolChange(tag.id)}
-                                                checked={tagBooleans[(tag.id) - 1]}
-                                            />
-                                        </div>
-                                    ))
-                                }
+                            <div className="select">
+                                <select name="category_id"
+                                    proptype="int"
+                                    value={post.category_id}
+                                    onChange={handleControlledInputChange}>
+                                    <option value="0">Select a category</option>
+                                    {categories.map(c => (
+                                        <option key={c.id} value={c.id}>
+                                            {c.label}
+                                        </option>
+                                    ))}
+                                </select>
                             </div>
+                        </div>
                     </div>
-                        </div> 
-                        */}
 
                     <div className="field">
                         <div className="control">
