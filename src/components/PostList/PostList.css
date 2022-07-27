@@ -1,0 +1,14 @@
+.post-card-container {
+    display: flex;
+    justify-content: space-between;
+    border: solid black 1px;
+    padding: 1rem;
+    margin: 1rem;
+}
+
+.post-card-image {
+    height: auto;
+    max-height: 150px;
+    width: auto;
+    max-width: 150px;
+}
