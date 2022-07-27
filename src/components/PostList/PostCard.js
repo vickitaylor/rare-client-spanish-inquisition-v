@@ -12,7 +12,7 @@ export const PostCard = ({ post }) => {
                 </Link>
                 <p>{post?.category?.label}</p>
                 <p>Written by: {post?.user?.first_name} {post?.user?.last_name}</p>
-                <p>Published: {post?.publication_date}</p>
+                <p>Published: {new Date(post?.publication_date).toLocaleDateString('en-US', { timeZone: 'UTC' })}</p>
 
             </div>
             <div className="post-card-image-container">

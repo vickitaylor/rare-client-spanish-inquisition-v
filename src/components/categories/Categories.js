@@ -8,7 +8,6 @@ import "./Categories.css"
 export const Categories = () => {
 
     const [categories, setCategories] = useState([])
-
     const [category, addCategory] = useState({
         label: ""
     })
@@ -33,42 +32,46 @@ export const Categories = () => {
         })
     }
 
-    // function to display and delete category
+    // function to delete 
     const deleteButton = (id) => {
-        return <button
-            onClick={() => {
-                const confirmBox = window.confirm("Do you really want to delete this category?")
-                if (confirmBox === true) {
-                    deleteCategory(id)
-                        .then(() => {
-                            getCategories()
-                                .then(setCategories)
-                        })
-
-                }
-            }}
-            className="dt_btn" key={`category--${category.id}`}>❌</button>
+        deleteCategory(id)
+            .then(() => {
+                getCategories()
+                    .then(setCategories)
+            })
     }
+
+
+
+
 
     return (
         <>
             <section>
                 <h2 className="cat_header">Categories</h2>
 
-
                 <article className="all_cat">
                     <div>
                         {
                             categories.map(category => {
-                                return <>
-                                    <div className="cat_list" key={`category--${category.id}`}>
-                                        {deleteButton(category.id)}
+                                return <section className="cat_list" key={`category--${category.id}`}>
+                                    <div>
+                                        <button className="dt_btn" key={`category--${category.id}`}
+                                            onClick={() => {
+                                                const confirmBox = window.confirm("Do you really want to delete this category?")
+                                                if (confirmBox === true) {
+                                                    deleteButton(category.id)
+                                                }
+                                            }}>
+
+                                            ❌</button>
                                         {category.label}
                                     </div>
-                                </>
+                                </section>
                             })
                         }
                     </div>
+
                     <aside className="new_cat">
                         <form className="input_cat">
                             <h2>Create a New Category</h2>
