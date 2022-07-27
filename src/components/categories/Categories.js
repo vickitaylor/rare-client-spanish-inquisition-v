@@ -20,6 +20,7 @@ export const Categories = () => {
         []
     )
 
+    // when create button is clicked, the new category is added to the list, and the form resets 
     const saveButtonClick = (event) => {
         event.preventDefault()
         saveCategory(category)
