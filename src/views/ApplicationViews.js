@@ -3,7 +3,9 @@ import { Login } from "../components/auth/Login"
 import { Register } from "../components/auth/Register"
 import { Categories } from "../components/categories/Categories"
 import { PostForm } from "../components/postForm/PostForm"
+import { PostList } from "../components/PostList/PostList"
 import { Authorized } from "./Authorized"
+
 
 export const ApplicationViews = ({ token, setToken }) => {
   return <>
@@ -14,8 +16,9 @@ export const ApplicationViews = ({ token, setToken }) => {
         {/* Add Routes here */}
         {
           <>
-          <Route path="create" element={<PostForm token={token} />}/>
-          <Route path="categories" element={<Categories />} />
+            <Route path="/" element={<PostList />}/>
+            <Route path="create" element={<PostForm token={token} />}/>
+            <Route path="categories" element={<Categories />} />
           </>
         }
         
