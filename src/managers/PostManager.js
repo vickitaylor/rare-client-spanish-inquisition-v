@@ -8,3 +8,4 @@ export const addPost = (post) => {
     })
         .then(response => response.json())
 }
+
