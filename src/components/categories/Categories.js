@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getCategories, saveCategory } from "../../managers/CategoryManager";
+import { getCategories, saveCategory, deleteCategory } from "../../managers/CategoryManager";
 import "./Categories.css"
 
 
@@ -33,6 +33,23 @@ export const Categories = () => {
         })
     }
 
+    // function to display and delete category
+    const deleteButton = (id) => {
+        return <button
+            onClick={() => {
+                const confirmBox = window.confirm("Do you really want to delete this category?")
+                if (confirmBox === true) {
+                    deleteCategory(id)
+                        .then(() => {
+                            getCategories()
+                                .then(setCategories)
+                        })
+
+                }
+            }}
+            className="dt_btn" key={`category--${category.id}`}>❌</button>
+    }
+
     return (
         <>
             <section>
@@ -43,7 +60,12 @@ export const Categories = () => {
                     <div>
                         {
                             categories.map(category => {
-                                return <div className="cat_list" key={`category--${category.id}`}>{category.label}</div>
+                                return <>
+                                    <div className="cat_list" key={`category--${category.id}`}>
+                                        {deleteButton(category.id)}
+                                        {category.label}
+                                    </div>
+                                </>
                             })
                         }
                     </div>

@@ -33,5 +33,10 @@ aside {
 }
 
 .btn {
-    margin: 1rem;
+    margin: 1rem 0 0 0;
+}
+
+.dt_btn {
+    background-color: white;
+    border: none;
 }
