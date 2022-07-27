@@ -3,6 +3,11 @@ export const getAllPosts = () => {
         .then(response => response.json())
 }
 
+export const getPostById = (postId) => {
+    return fetch(`http://localhost:8088/posts/${postId}`)
+    .then(response => response.json())
+}
+
 export const addPost = (post) => {
     return fetch("http://localhost:8088/posts", {
         method: "POST",
