@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { getAllTags, saveTag, deleteTag} from "../../managers/TagManager";
-// import "../categories/categories.css"
 
 
 // tag component to display the tags, add a new tag, and delete tag
@@ -48,7 +47,7 @@ export const TagList = () => {
     return (
         <>
             <section>
-                <h2 className="cat_header">Categories</h2>
+                <h2 className="cat_header">Tags</h2>
 
                 <article className="all_cat">
                     <div>
