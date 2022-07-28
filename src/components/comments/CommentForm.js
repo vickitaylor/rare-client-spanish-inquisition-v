@@ -1,15 +1,17 @@
-export const CommentsForm = () => {
+import { useState } from "react"
+import { useNavigate, useParams } from "react-router-dom"
 
-    const currentUser = localStorage.getItem("pal_user")
-    const currentUserObject = JSON.parse(currentUser)
+export const CommentsForm = ({ token }) => {
+
 
     const navigate = useNavigate()
-    const { parkingLotId } = useParams()
+    const { post_id } = useParams()
 
     const [comments, create] = useState({
-        userId: currentUserObject.id,
-        parkingLotId: parkingLotId,
-        comment: ""
+        
+        post_id: post_id,
+        author_id: parseInt(token),
+        content: ""
     })
 
     const handleSaveButtonClick = (event) => {
@@ -17,9 +19,9 @@ export const CommentsForm = () => {
     
 
         const newComment = {
-            userId: currentUserObject.id,
-            parkingLotId: parkingLotId,
-            comment: comments.comment
+        post_id: post_id,
+        author_id: parseInt(token),
+        content: comments.content
         }
 
         return fetch('http://localhost:8088/comments',{
@@ -29,11 +31,40 @@ export const CommentsForm = () => {
         })
             .then(res => res.json())
             .then(() => {
-                navigate(`/parkingDetails/${parkingLotId}`)
+                navigate(`/commentsList/:postId`)
             })
     }
 
-    return
+    return(
     <>
-    </>
+    <form className="commentForm">
+            <h2 className="commentTitle">Leave a Comment below</h2>
+                     
+            <fieldset>
+                <div className="form-group">
+                    <input
+                        required autoFocus
+                        type="text"
+                        
+                        maxLength={250}
+                        className="form-control"
+                        value={comments.content}
+                        onChange={
+                            (evt) => {
+                                const copy = { ...comments }
+                                copy.content = evt.target.value
+                                create(copy)
+                            }
+                        } />
+                </div>
+            </fieldset>
+            
+            <button
+                onClick={(clickEvent) => handleSaveButtonClick(clickEvent)}
+                className="">
+                Submit comment
+            </button>
+        </form>
+        </>
+    )
 }
