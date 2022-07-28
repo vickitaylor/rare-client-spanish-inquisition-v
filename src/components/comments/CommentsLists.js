@@ -40,7 +40,9 @@ export const CommentsList = () => {
 
 
     return<>
-        <h1>Comments</h1>
+        <h1>{currentPost.title} Comments</h1>
+
+        
     <button className="button" onClick={() => navigate(`/CommentsForm/${currentPost?.id}`)}>
                                         Add Comment</button>
     <section className="">

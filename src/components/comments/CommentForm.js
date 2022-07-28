@@ -5,11 +5,11 @@ export const CommentsForm = ({ token }) => {
 
 
     const navigate = useNavigate()
-    const { post_id } = useParams()
+    const { postId } = useParams()
 
     const [comments, create] = useState({
         
-        post_id: post_id,
+        post_id: postId,
         author_id: parseInt(token),
         content: ""
     })
@@ -19,7 +19,7 @@ export const CommentsForm = ({ token }) => {
     
 
         const newComment = {
-        post_id: post_id,
+        post_id: postId,
         author_id: parseInt(token),
         content: comments.content
         }
@@ -31,7 +31,7 @@ export const CommentsForm = ({ token }) => {
         })
             .then(res => res.json())
             .then(() => {
-                navigate(`/commentsList/:postId`)
+                navigate(`/commentsList/${postId}`)
             })
     }
 
