@@ -17,3 +17,10 @@ export const saveCategory = (cat) => {
         body: JSON.stringify(cat)
     }).then(getCategories);
 };
+
+export const deleteCategory = (catId) => {
+    return fetch(`http://localhost:8088/categories/${catId}`, {
+        method: "DELETE"
+    })
+  }
+  

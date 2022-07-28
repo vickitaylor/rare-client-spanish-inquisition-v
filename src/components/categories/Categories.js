@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getCategories, saveCategory } from "../../managers/CategoryManager";
+import { getCategories, saveCategory, deleteCategory } from "../../managers/CategoryManager";
 import "./Categories.css"
 
 
@@ -8,7 +8,6 @@ import "./Categories.css"
 export const Categories = () => {
 
     const [categories, setCategories] = useState([])
-
     const [category, addCategory] = useState({
         label: ""
     })
@@ -20,6 +19,7 @@ export const Categories = () => {
         []
     )
 
+    // when create button is clicked, the new category is added to the list, and the form resets 
     const saveButtonClick = (event) => {
         event.preventDefault()
         saveCategory(category)
@@ -32,20 +32,46 @@ export const Categories = () => {
         })
     }
 
+    // function to delete 
+    const deleteButton = (id) => {
+        deleteCategory(id)
+            .then(() => {
+                getCategories()
+                    .then(setCategories)
+            })
+    }
+
+
+
+
+
     return (
         <>
             <section>
                 <h2 className="cat_header">Categories</h2>
 
-
                 <article className="all_cat">
                     <div>
                         {
                             categories.map(category => {
-                                return <div className="cat_list" key={`category--${category.id}`}>{category.label}</div>
+                                return <section className="cat_list" key={`category--${category.id}`}>
+                                    <div>
+                                        <button className="dt_btn" key={`category--${category.id}`}
+                                            onClick={() => {
+                                                const confirmBox = window.confirm("Do you really want to delete this category?")
+                                                if (confirmBox === true) {
+                                                    deleteButton(category.id)
+                                                }
+                                            }}>
+
+                                            ❌</button>
+                                        {category.label}
+                                    </div>
+                                </section>
                             })
                         }
                     </div>
+
                     <aside className="new_cat">
                         <form className="input_cat">
                             <h2>Create a New Category</h2>

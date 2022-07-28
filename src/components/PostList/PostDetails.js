@@ -30,7 +30,7 @@ export const PostDetails = () => {
             <div className="post-detail-info-bar">
                 <h3>By: {currentPost?.user?.first_name} {currentPost?.user?.last_name}</h3>
                 <h3>VIEW COMMENTS</h3>
-                <h3>{currentPost?.publication_date}</h3>
+                <h3>{new Date(currentPost?.publication_date).toLocaleDateString('en-US', { timeZone: 'UTC' })}</h3>
             </div>
             <div className = "post-detail-body">
                 <p>{currentPost?.content}</p>
