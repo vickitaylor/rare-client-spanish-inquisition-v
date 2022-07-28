@@ -15,6 +15,7 @@ export const PostDetails = () => {
     )
 
     return <>
+    
     <div className="details-window">
         <div className ="post-detail-container">
             <h1>{currentPost?.title}</h1>
