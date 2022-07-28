@@ -6,6 +6,7 @@ import { MyPosts } from "../components/myPosts.js/MyPosts"
 import { PostForm } from "../components/postForm/PostForm"
 import { PostDetails } from "../components/PostList/PostDetails"
 import { PostList } from "../components/PostList/PostList"
+import { TagList } from "../components/tags/TagList"
 import { Authorized } from "./Authorized"
 
 
@@ -23,6 +24,7 @@ export const ApplicationViews = ({ token, setToken }) => {
             <Route path="categories" element={<Categories  />} />
             <Route path="myposts" element={<MyPosts token={token} />} />
             <Route path="/post/:postId" element={ <PostDetails /> } />
+            <Route path="tags" element={<TagList  />} />
           </>
         }
         
