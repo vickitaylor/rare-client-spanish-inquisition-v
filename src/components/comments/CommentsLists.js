@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
-import { getAllComments } from "../../managers/CommentManager"
+import { editComment, getAllComments } from "../../managers/CommentManager"
 import { getPostById } from "../../managers/PostManager"
 import "./CommentList.css"
 
@@ -36,6 +36,15 @@ export const CommentsList = () => {
         [comments]
     )
 
+    // function to edit tags
+    const editButton = (commentObj) => {
+        editComment(commentObj)
+            .then(() => {
+                getAllComments()
+                    .then(setComments)
+            })
+    }
+
 
 
 
@@ -50,8 +59,16 @@ export const CommentsList = () => {
             filteredComments.map(
                 (comment) => {
                     return <article className="post-card-container" key={`comment--${comment.id}`}>
+                        {/* edit button */}
+                        <button className="dt_btn" key={`edit-comment-btn--${comment.id}`} onClick={() => {
+                                            const editBox = window.prompt("Edit this comment?", "")
+                                            const commentCopy = { ...comment }
+                                            commentCopy.content = editBox
+                                            editButton(commentCopy)
+                                        }}>⚙️</button>
                         <p>{comment.author_id}</p>
                         <p>{comment.content}</p>
+                        <p></p>
                     </article>
                 }
             )
