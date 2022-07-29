@@ -21,6 +21,9 @@ export const PostDetails = () => {
     <div className="details-window">
         <div className ="post-detail-container">
             <h1>{currentPost?.title}</h1>
+
+            
+
             <div className ="post-detail-header">
                 <button className="deleteButton"> DELETE BUTTON</button>
                 <h3>{currentPost?.category?.label}</h3>
@@ -40,6 +43,9 @@ export const PostDetails = () => {
             <div className = "post-detail-body">
                 <p>{currentPost?.content}</p>
             </div>
+
+            <button className="button" onClick={() => navigate(`/manageTags/${currentPost?.id}`)}>
+                                        Manage Tags</button>
         </div>
     </div>
     
