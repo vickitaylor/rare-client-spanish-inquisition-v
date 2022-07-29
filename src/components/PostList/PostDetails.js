@@ -17,13 +17,14 @@ export const PostDetails = () => {
     )
 
     return <>
+    
     <div className="details-window">
         <div className ="post-detail-container">
             <h1>{currentPost?.title}</h1>
             <div className ="post-detail-header">
                 <button className="deleteButton"> DELETE BUTTON</button>
                 <h3>{currentPost?.category?.label}</h3>
-                <button className="editButton">EDIT BUTTON</button>
+                <button className="editButton"  onClick={() => navigate(`/EditPosts/${currentPost?.id}`)}>EDIT BUTTON</button>
             </div>
 
             <div className="post-detail-image-div">

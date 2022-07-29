@@ -1,39 +1,61 @@
 import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
+import {getCategories} from "../../managers/CategoryManager"
+import { editPost } from "../../managers/PostManager"
 
-export const PostEdit = () => {
+export const EditPosts = () => {
     const [post, update] = useState({
-        description: "",
-        urgent: false
+                category_id: "",
+                title: "",
+                image_url: "",
+                content:"",
     })
     const { postId } = useParams()
     const navigate = useNavigate()
-
+    const [categories,setCatergories] = useState([])
+	useEffect(() =>{
+		getCategories()
+			.then (setCatergories)
+	}, [])
     useEffect(() => {
-        fetch(`http://localhost:8088/PostCard/${postId}`)
+        fetch(`http://localhost:8088/posts/${postId}`)
             .then(response => response.json())
             .then((data) => {
                 update(data)
             })
     }, [postId])
 
+	const handleControlledInputChange = (event) => {
+        /*
+            When changing a state object or array, always create a new one
+            and change state instead of modifying current one
+        */
+        const newEntry = { ...post }
+        newEntry[event.target.name] = event.target.value
+        update(newEntry)
+    }
     const handleSaveButtonClick = (event) => {
         event.preventDefault()
-
-        return fetch(`http://localhost:8088/PostCard/${post.id}`, {
+			debugger
+        return fetch(`http://localhost:8088/posts/${post.id}`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify(post)
         })
-            .then(response => response.json())
             .then(() => {
-                navigate("/posts")
+                navigate(`/post/${postId}`)
             })
     }
 
-
+    const constructUpdatedPost = (postObject) => {
+        
+        editPost(postObject)
+            .then(() => {
+                navigate("/post/${post.id}")
+            })
+    }
     return <form className="postForm">
         <h2 className="PostForm__title">Edit Post Card</h2>
         <article className="panel is-info">
@@ -111,7 +133,7 @@ export const PostEdit = () => {
                             <button type="submit"
                                 onClick={evt => {
                                     evt.preventDefault()
-                                    constructNewPost()
+                                    handleSaveButtonClick(evt)
                                 }}
                                 className="button is-link">
                                 Save Edits

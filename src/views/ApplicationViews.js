@@ -6,6 +6,7 @@ import { CommentsForm } from "../components/comments/CommentForm"
 import { CommentsList } from "../components/comments/CommentsLists"
 import { MyPosts } from "../components/myPosts.js/MyPosts"
 import { PostForm } from "../components/postForm/PostForm"
+import {EditPosts} from "../components/PostList/EditPosts"
 import { PostDetails } from "../components/PostList/PostDetails"
 import { PostList } from "../components/PostList/PostList"
 import { TagList } from "../components/tags/TagList"
@@ -28,6 +29,7 @@ export const ApplicationViews = ({ token, setToken }) => {
             <Route path="/post/:postId" element={ <PostDetails /> } />
             <Route path="/commentsList/:postId" element={ <CommentsList /> } />
             <Route path="/commentsForm/:postId" element={ <CommentsForm token={token} /> } />
+            <Route path="/EditPosts/:postId" element={ <EditPosts token={token} /> } />
             <Route path="tags" element={<TagList  />} />
           </>
         }
