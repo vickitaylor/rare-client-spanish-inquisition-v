@@ -14,6 +14,11 @@ export const addComment = (comment) => {
         .then(response => response.json())
 }
 
+export const deleteComment = (commentId) => {
+    return fetch(`http://localhost:8088/comments/${commentId}`, {
+        method: "DELETE"
+    })
+}
 export const editComment = comment => {
     return fetch(`http://localhost:8088/comments/${comment.id}`, {
         method: "PUT",
