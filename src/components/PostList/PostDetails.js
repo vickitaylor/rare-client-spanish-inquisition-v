@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import { getPostById } from "../../managers/PostManager"
 import { useState, useEffect } from "react"
 
@@ -6,6 +6,8 @@ import { useState, useEffect } from "react"
 export const PostDetails = () => {
     const { postId } = useParams()
     const [ currentPost, setCurrentPost ] = useState({})
+
+    const navigate = useNavigate()
 
     useEffect(
         () => {
@@ -30,7 +32,8 @@ export const PostDetails = () => {
 
             <div className="post-detail-info-bar">
                 <h3>By: {currentPost?.user?.first_name} {currentPost?.user?.last_name}</h3>
-                <h3>VIEW COMMENTS</h3>
+                <button className="button" onClick={() => navigate(`/CommentsList/${currentPost?.id}`)}>
+                                        View Comments</button>
                 <h3>{new Date(currentPost?.publication_date).toLocaleDateString('en-US', { timeZone: 'UTC' })}</h3>
             </div>
             <div className = "post-detail-body">
