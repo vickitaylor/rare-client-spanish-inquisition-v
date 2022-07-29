@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom"
 import { getPostById } from "../../managers/PostManager"
 import { useState, useEffect } from "react"
-import "./PostList.css"
+
 
 export const PostDetails = () => {
     const { postId } = useParams()
@@ -19,8 +19,9 @@ export const PostDetails = () => {
         <div className ="post-detail-container">
             <h1>{currentPost?.title}</h1>
             <div className ="post-detail-header">
-                <h1>DELETE BUTTON</h1>
+                <button className="deleteButton"> DELETE BUTTON</button>
                 <h3>{currentPost?.category?.label}</h3>
+                <button className="editButton">EDIT BUTTON</button>
             </div>
 
             <div className="post-detail-image-div">
