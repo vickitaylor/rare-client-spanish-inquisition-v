@@ -28,3 +28,13 @@ export const editTag = tag => {
         body: JSON.stringify(tag)
     })
 };
+
+export const savePostTags = (postTagArray) => {
+    return fetch("http://localhost:8088/postTags", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(postTagArray)
+    })
+}
