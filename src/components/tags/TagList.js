@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { getAllTags, saveTag, deleteTag} from "../../managers/TagManager";
+import { getAllTags, saveTag, deleteTag, editTag } from "../../managers/TagManager";
 
 
-// tag component to display the tags, add a new tag, and delete tag
+// tag component to display the tags, add a new tag, edit, and delete tag
 
 export const TagList = () => {
 
@@ -40,6 +40,14 @@ export const TagList = () => {
             })
     }
 
+    // function to edit tags
+    const editButton = (tagObj) => {
+        editTag(tagObj)
+            .then(() => {
+                getAllTags()
+                    .then(setTags)
+            })
+    }
 
 
 
@@ -55,15 +63,23 @@ export const TagList = () => {
                             tags.map(tag => {
                                 return <section className="cat_list" key={`tag--${tag.id}`}>
                                     <div>
-                                        <button className="dt_btn" key={`tag--${tag.id}`}
+
+                                        {/* delete button */}
+                                        <button className="dt_btn" key={`delete-tag-btn--${tag.id}`}
                                             onClick={() => {
                                                 const confirmBox = window.confirm("Do you really want to delete this tag?")
                                                 if (confirmBox === true) {
                                                     deleteButton(tag.id)
                                                 }
-                                            }}>
+                                            }}>❌</button>
 
-                                            ❌</button>
+                                        {/* edit button */}
+                                        <button className="dt_btn" key={`edit-tag-btn--${tag.id}`} onClick={() => {
+                                            const editBox = window.prompt("Edit this tag", "")
+                                            const tagCopy = { ...tag }
+                                            tagCopy.label = editBox
+                                            editButton(tagCopy)
+                                        }}>⚙️</button>
                                         {tag.label}
                                     </div>
                                 </section>

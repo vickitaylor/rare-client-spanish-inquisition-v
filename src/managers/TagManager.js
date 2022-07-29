@@ -18,3 +18,13 @@ export const deleteTag = (tagId) => {
         method: "DELETE"
     })
 };
+
+export const editTag = tag => {
+    return fetch(`http://localhost:8088/tags/${tag.id}`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(tag)
+    })
+};

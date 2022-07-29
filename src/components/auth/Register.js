@@ -59,9 +59,9 @@ export const Register = ({setToken}) => {
         </div>
 
         <div className="field">
-          <label className="label">Email</label>
+          <label className="label">Username</label>
           <div className="control">
-            <input className="input" type="email" ref={email} />
+            <input className="input" type="text" ref={username} />
           </div>
         </div>
 
